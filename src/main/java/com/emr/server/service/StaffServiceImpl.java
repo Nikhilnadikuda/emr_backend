@@ -47,4 +47,26 @@ public class StaffServiceImpl implements StaffService {
     public void deleteStaff(Long id) {
         staffRepository.deleteById(id);
     }
+
+	@Override
+	public Staff getStaffById(Long id) {
+		return staffRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Doctor not exist with id :"+id));
+	}
+
+	@Override
+	public Staff getDoctorById(Long id) {
+		Staff doctor= staffRepository.findByJobTitle("Doctor");
+		if(doctor!=null) {
+			if(doctor.getId()==id) {
+				return doctor;
+			}
+			else {
+				return null;
+			}
+		}
+		else {
+			return null;
+		}
+		
+	}
 }

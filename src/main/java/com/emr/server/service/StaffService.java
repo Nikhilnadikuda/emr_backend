@@ -9,4 +9,6 @@ public interface StaffService {
     Staff createStaff(Staff staff);
     Staff updateStaff(Staff staff);
     void deleteStaff(Long id);
+    Staff getStaffById(Long id);
+    Staff getDoctorById(Long id);
 }

@@ -26,7 +26,7 @@ public class PatientServiceImpl implements PatientService{
 	@Override
     public Patient getPatientById(Long id) {
         return patientRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid patient ID"));
+                .orElse(null);
     }
 	@Override
 	public Patient updatePatient(Patient patient) {

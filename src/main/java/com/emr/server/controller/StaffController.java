@@ -2,6 +2,7 @@ package com.emr.server.controller;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import com.emr.server.service.StaffService;
 
 @RestController
 @RequestMapping("/staff")
+@CrossOrigin(origins="http://localhost:3000")
 public class StaffController {
     private final StaffService staffService;
 
@@ -42,5 +44,9 @@ public class StaffController {
     public String deleteStaff(@PathVariable Long id) {
         staffService.deleteStaff(id);
         return "Deleted Successfully";
+    }
+    @GetMapping("/doctor/{id}")
+    public Staff getDoctorById(@PathVariable Long id) {
+    	return staffService.getDoctorById(id);
     }
 }
