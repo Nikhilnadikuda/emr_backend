@@ -3,7 +3,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.emr.server.dto.MedicalRecordDTO;
 import com.emr.server.model.MedicalRecord;
 import com.emr.server.model.Patient;
 import com.emr.server.model.Staff;
@@ -31,22 +30,22 @@ public class MedicalRecordServiceImpl implements MedicalRecordService{
     }
 
     @Override
-    public MedicalRecord createMedicalRecord(MedicalRecordDTO medicalRecordDto) {
-        Patient patient = patientRepository.findById(medicalRecordDto.getPatientId())
+    public MedicalRecord createMedicalRecord(MedicalRecord medicalRecord) {
+        Patient patient = patientRepository.findById(medicalRecord.getPatientId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid patient ID"));
         Staff doctor = staffRepository.findByJobTitle("Doctor");
         if (doctor == null) {
             throw new IllegalStateException("Doctor not found");
         }
-        MedicalRecord medicalRecord = new MedicalRecord();
-        medicalRecord.setPatientId(patient.getId());
-        medicalRecord.setDoctorId(doctor.getId());
-        medicalRecord.setDate(medicalRecordDto.getDate());
-        medicalRecord.setDiagnosis(medicalRecordDto.getDiagnosis());
-        medicalRecord.setPrescription(medicalRecordDto.getPrescription());
-        medicalRecord.setNotes(medicalRecordDto.getNotes());
-        medicalRecordRepository.save(medicalRecord);
-        return new MedicalRecord(medicalRecord.getId(),medicalRecord.getDate(),medicalRecord.getDiagnosis(),medicalRecord.getPrescription(),medicalRecord.getNotes(),medicalRecord.getPatientId(),medicalRecord.getDoctorId());
+        MedicalRecord newMedicalRecord = new MedicalRecord();
+        newMedicalRecord.setPatientId(patient.getId());
+        newMedicalRecord.setDoctorId(doctor.getId());
+        newMedicalRecord.setDate(medicalRecord.getDate());
+        newMedicalRecord.setDiagnosis(medicalRecord.getDiagnosis());
+        newMedicalRecord.setPrescription(medicalRecord.getPrescription());
+        newMedicalRecord.setNotes(medicalRecord.getNotes());
+        medicalRecordRepository.save(newMedicalRecord);
+        return new MedicalRecord(newMedicalRecord.getId(),newMedicalRecord.getDate(),newMedicalRecord.getDiagnosis(),newMedicalRecord.getPrescription(),newMedicalRecord.getNotes(),newMedicalRecord.getPatientId(),newMedicalRecord.getDoctorId());
     }
 
     @Override

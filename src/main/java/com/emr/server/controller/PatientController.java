@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.emr.server.dto.PatientDTO;
 import com.emr.server.model.Patient;
 import com.emr.server.service.PatientService;
 
@@ -27,14 +26,14 @@ public class PatientController {
     }
 
     @PostMapping
-    public ResponseEntity<Patient> createPatient(@RequestBody PatientDTO patientDto) {
-        Patient createdPatient = patientService.createPatient(patientDto);
+    public ResponseEntity<Patient> createPatient(@RequestBody Patient patient) {
+        Patient createdPatient = patientService.createPatient(patient);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPatient);
     }
 
     @PutMapping
-    public ResponseEntity<Patient> updatePatient(@RequestBody PatientDTO patientDto) {
-        Patient updatedPatient = patientService.updatePatient(patientDto);
+    public ResponseEntity<Patient> updatePatient(@RequestBody Patient patient) {
+        Patient updatedPatient = patientService.updatePatient(patient);
         return ResponseEntity.ok(updatedPatient);
     }
 

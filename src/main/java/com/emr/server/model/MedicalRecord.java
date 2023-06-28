@@ -28,8 +28,6 @@ public class MedicalRecord {
     @JoinColumn(name = "doctor_id", insertable = false, updatable = false)
     private Staff doctor;
 
-    // Constructors
-
     public MedicalRecord() {
     }
 
@@ -42,8 +40,6 @@ public class MedicalRecord {
         this.prescription = prescription;
         this.notes = notes;
     }
-
-    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -100,20 +96,4 @@ public class MedicalRecord {
     public void setNotes(String notes) {
         this.notes = notes;
     }
-
-//    public Patient getPatient() {
-//        return patient;
-//    }
-//
-//    public void setPatient(Patient patient) {
-//        this.patient = patient;
-//    }
-//
-//    public Staff getDoctor() {
-//        return doctor;
-//    }
-//
-//    public void setDoctor(Staff doctor) {
-//        this.doctor = doctor;
-//    }
 }

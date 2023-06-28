@@ -3,7 +3,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.emr.server.dto.MedicalRecordDTO;
 import com.emr.server.model.MedicalRecord;
 import com.emr.server.service.MedicalRecordService;
 
@@ -31,7 +30,7 @@ public class MedicalRecordController {
 
     // POST /medical-records
     @PostMapping
-    public MedicalRecord createMedicalRecord(@RequestBody MedicalRecordDTO medicalRecord) {
+    public MedicalRecord createMedicalRecord(@RequestBody MedicalRecord medicalRecord) {
         return medicalRecordService.createMedicalRecord(medicalRecord);
     }
 

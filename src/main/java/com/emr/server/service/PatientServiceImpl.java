@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.emr.server.dto.PatientDTO;
 import com.emr.server.model.Patient;
 import com.emr.server.repository.PatientRepository;
 @Service
@@ -13,17 +12,7 @@ public class PatientServiceImpl implements PatientService{
 	@Autowired 
 	private PatientRepository patientRepository;
 	@Override
-	public Patient createPatient(PatientDTO patientDto) {
-        Patient patient = new Patient();
-        patient.setName(patientDto.getName());
-        patient.setAge(patientDto.getAge());
-        patient.setGender(patientDto.getGender());
-        patient.setAddress(patientDto.getAddress());
-        patient.setPhone(patientDto.getPhone());
-        patient.setEmail(patientDto.getEmail());
-        patient.setMedicalHistory(patientDto.getMedicalHistory());
-        patient.setTreatmentPlan(patientDto.getTreatmentPlan());
-
+	public Patient createPatient(Patient patient) {
         return patientRepository.save(patient);
     }
 	@Override
@@ -40,20 +29,18 @@ public class PatientServiceImpl implements PatientService{
                 .orElseThrow(() -> new IllegalArgumentException("Invalid patient ID"));
     }
 	@Override
-	public Patient updatePatient(PatientDTO patientDto) {
-		Patient patient = patientRepository.findById(patientDto.getId())
+	public Patient updatePatient(Patient patient) {
+		Patient updatedPatient = patientRepository.findById(patient.getId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid patient ID"));
-        patient.setName(patientDto.getName());
-        patient.setAge(patientDto.getAge());
-        patient.setGender(patientDto.getGender());
-        patient.setAddress(patientDto.getAddress());
-        patient.setPhone(patientDto.getPhone());
-        patient.setEmail(patientDto.getEmail());
-        patient.setMedicalHistory(patientDto.getMedicalHistory());
-        patient.setTreatmentPlan(patientDto.getTreatmentPlan());
+		updatedPatient.setName(patient.getName());
+		updatedPatient.setAge(patient.getAge());
+		updatedPatient.setGender(patient.getGender());
+		updatedPatient.setAddress(patient.getAddress());
+		updatedPatient.setPhone(patient.getPhone());
+		updatedPatient.setEmail(patient.getEmail());
+		updatedPatient.setMedicalHistory(patient.getMedicalHistory());
+		updatedPatient.setTreatmentPlan(patient.getTreatmentPlan());
 
-        return patientRepository.save(patient);
+        return patientRepository.save(updatedPatient);
 	}
-	
-	
 }
